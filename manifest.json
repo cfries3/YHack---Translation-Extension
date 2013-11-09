@@ -4,6 +4,11 @@
 	"name": "Parrot",
 	"description": "This extension allows real time translation.",
 	"version": "1.0",
+	"icons": {
+		"16": "parrot.png",
+		"48": "parrot.png",
+		"128": "parrot.png"
+	},
 	
 	"background": {
 		"scripts": ["background.js"]
@@ -11,7 +16,7 @@
 	
 	"browser_action": {
 		"default_popup": "options.html",
-		"default_icon": "parrot.jpg"
+		"default_icon": "parrot.png"
 	},
 	
 	"content_scripts": [
