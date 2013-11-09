@@ -12,15 +12,97 @@ span.tooltip {
   margin-left:-60px;
 }
 
-@-webkit-keyframes rotating {
-    from{
-        -webkit-transform: rotate(0deg);
-    }
-    to{
-        -webkit-transform: rotate(360deg);
-    }
+#loadingProgressG{
+width:80px;
+height:6px;
+overflow:hidden;
+background-color:#7D7C7D;
+-moz-border-radius:3px;
+-webkit-border-radius:3px;
+-ms-border-radius:3px;
+-o-border-radius:3px;
+border-radius:3px;
 }
 
-.spinner {
-    -webkit-animation: rotating 2s linear infinite;
+.loadingProgressG{
+background-color:#575657;
+margin-top:0;
+margin-left:-80px;
+-moz-animation-name:bounce_loadingProgressG;
+-moz-animation-duration:1.3s;
+-moz-animation-iteration-count:infinite;
+-moz-animation-timing-function:linear;
+-webkit-animation-name:bounce_loadingProgressG;
+-webkit-animation-duration:1.3s;
+-webkit-animation-iteration-count:infinite;
+-webkit-animation-timing-function:linear;
+-ms-animation-name:bounce_loadingProgressG;
+-ms-animation-duration:1.3s;
+-ms-animation-iteration-count:infinite;
+-ms-animation-timing-function:linear;
+-o-animation-name:bounce_loadingProgressG;
+-o-animation-duration:1.3s;
+-o-animation-iteration-count:infinite;
+-o-animation-timing-function:linear;
+animation-name:bounce_loadingProgressG;
+animation-duration:1.3s;
+animation-iteration-count:infinite;
+animation-timing-function:linear;
+width:80px;
+height:6px;
 }
+
+@-moz-keyframes bounce_loadingProgressG{
+0%{
+margin-left:-80px;
+}
+
+100%{
+margin-left:80px;
+}
+
+}
+
+@-webkit-keyframes bounce_loadingProgressG{
+0%{
+margin-left:-80px;
+}
+
+100%{
+margin-left:80px;
+}
+
+}
+
+@-ms-keyframes bounce_loadingProgressG{
+0%{
+margin-left:-80px;
+}
+
+100%{
+margin-left:80px;
+}
+
+}
+
+@-o-keyframes bounce_loadingProgressG{
+0%{
+margin-left:-80px;
+}
+
+100%{
+margin-left:80px;
+}
+
+}
+
+@keyframes bounce_loadingProgressG{
+0%{
+margin-left:-80px;
+}
+
+100%{
+margin-left:80px;
+}
+
+} 

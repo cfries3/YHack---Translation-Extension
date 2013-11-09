@@ -34,7 +34,7 @@ $(document).ready(function() {
       var word = $(event.target).text();
 
       // Add Loading tooltip
-      $(event.target).html(word + "<span class=\"tooltip\">Loading...</span>");
+      $(event.target).html(word + "<span class=\"tooltip\"><div id=\"loadingProgressG\"><div id=\"loadingProgressG_1\" class=\"loadingProgressG\"></div></div> </span>");
       
       // Remove any trailing punctuation without saving the text into the page
       word = word.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
