@@ -3,7 +3,15 @@ $('#news').click(function(){
   var suggestions = ["cuisine", "gouvernement", "chèvre", "football", "médecins", "histoire", "Colorado", "Soleil", "astronomy", "Moon"];
 
   $('#news').html("Loading...");
-  get_articles(suggestions[Math.floor(Math.random() * suggestions.length)], 'french');
+
+  //select vocabulary from the database  
+  //get foreign language here
+  var learning = "french";
+  var bkg = chrome.extension.getBackgroundPage();
+  get_articles(bkg.localStorage.articleWord, learning);
+
+
+//  get_articles(suggestions[Math.floor(Math.random() * suggestions.length)], 'french');
 
   setTimeout(function() {
     $('#news').html(backup_text);

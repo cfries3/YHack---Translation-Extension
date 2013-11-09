@@ -194,7 +194,12 @@ function readObjectStore(storeName, mode) {
 					}
 				}
 				document.getElementsByTagName("body")[0].innerHTML = response;
-			}
+			} else if (mode == "articles") {
+                var random = Math.floor((Math.random()*langSet.length())+1);
+
+                //send background a message for options
+                chrome.runtime.sendMessage({greeting: langSet[random][foreignWord]}, function(response));
+            }
 		}
     }
 }
