@@ -30,10 +30,10 @@ function getTranslation(w, target) {
     data: null,
     success: function(data) {
      results = $(data).find("pod").last();
-     $(target).children('.tooltip').text(results.find("plaintext").text()); 
+     $(target).children('.tooltip').text(results.find("plaintext").text().split(' ').splice(0,3).join(' ')); 
     },
     error: function(data) { 
       console.log('ERROR');
     }
-});
+  });
 }

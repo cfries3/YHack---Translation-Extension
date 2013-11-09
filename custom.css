@@ -11,3 +11,16 @@ span.tooltip {
   margin-top: 20px;
   margin-left:-60px;
 }
+
+@-webkit-keyframes rotating {
+    from{
+        -webkit-transform: rotate(0deg);
+    }
+    to{
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    -webkit-animation: rotating 2s linear infinite;
+}
