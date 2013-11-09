@@ -4,14 +4,8 @@ $('#news').click(function(){
 
   $('#news').html("Loading...");
 
-  //select vocabulary from the database  
-  //get foreign language here
-  var learning = "french";
-  var bkg = chrome.extension.getBackgroundPage();
-  get_articles(bkg.localStorage.articleWord, learning);
-
-
-//  get_articles(suggestions[Math.floor(Math.random() * suggestions.length)], 'french');
+  
+  get_articles(suggestions[Math.floor(Math.random() * suggestions.length)], 'french');
 
   setTimeout(function() {
     $('#news').html(backup_text);
