@@ -23,7 +23,7 @@
 		{
 			"matches": ["http://*/*", "https://*/*"],
 			"css": ["custom.css", "foreignwordformatting.css"],
-			"js": ["indexedDB.js", "jquery.js", "jquery.lettering.js", "jquery.hoverintent.minified.js", "replaceText.js", "parrot.js"] 
+			"js": ["jquery.js", "jquery.lettering.js", "jquery.hoverintent.minified.js", "replaceText.js", "indexedDB.js", "parrot.js"]
 		}
 	],
 	
