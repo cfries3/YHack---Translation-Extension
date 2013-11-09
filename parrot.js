@@ -1,7 +1,9 @@
 function getTranslation(w, target) {
   var xml = "";
   var results = "";
-
+  var native_lang = "";
+  var foreign_lang = ""
+		
   $.ajax({
     dataType: "xml",
     url: "http://api.wolframalpha.com/v2/query?appid=4KJG8A-T9U3UY2EPT&input=translate%20" + w + "%20from%20" + localStorage.native_language + "%20to%20" + localStorage.foreign_language + "&format=plaintext",
@@ -21,7 +23,6 @@ $(document).ready(function() {
 	if (lang == "en") {
 		replaceWords();
 	} else {
-    
 	  // Isolate every words by a span
 	  $('p').lettering('words');
 		
@@ -38,7 +39,7 @@ $(document).ready(function() {
       
       // Remove any trailing punctuation without saving the text into the page
       word = word.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
- 
+		
       // Translate word
       getTranslation(word, event.target);
 
