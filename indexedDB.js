@@ -1,6 +1,5 @@
 var idbSupported = false;
 var db;
-//setupdb();
 
 function setupdb(){
 
@@ -47,12 +46,13 @@ function setupdb(){
         openRequest.onsuccess = function(e) {
             console.log("Success, in finding database");
             db = e.target.result;
-			start();
+            return true;
         }
  
         openRequest.onerror = function(e) {
             console.log("Error, in finding database");
             console.dir(e);
+            return false;
         }
     }
 }
