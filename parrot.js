@@ -44,7 +44,7 @@ function getTranslation(w, target) {
 $(document).ready(function() {
   if (localStorage.native_language === undefined) { localStorage.native_language = "English" }
   if (localStorage.foreign_language === undefined) { localStorage.foreign_language = "French" }
-	setupdb();
+	setupdb('parrot');
 })
 
 function start() {
