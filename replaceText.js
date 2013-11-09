@@ -1,6 +1,7 @@
-$( document ).ready(function() {
+function replaceWords() {
+	
 	chrome.runtime.sendMessage({ "text": document.getElementsByTagName("body")[0].innerHTML }, function(response) {
 		document.getElementsByTagName("body")[0].innerHTML = response.translation;
-	});
-	
-});
+		});
+}
+
