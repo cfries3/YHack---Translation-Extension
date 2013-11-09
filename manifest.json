@@ -17,11 +17,11 @@
 		{
 			"matches": ["http://*/*", "https://*/*"],
 			"css": ["foreignwordformatting.css"],
-			"js": ["jquery-2.0.3.min.js", "replaceText.js"] 
+			"js": ["jquery.js", "replaceText.js"] 
 		}
 	],
 	
 	"web_accessible_resources": [
-		"script/jquery-2.0.3.min.js"
+		"script/jquery.js"
 	]
 }
