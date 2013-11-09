@@ -20,6 +20,8 @@ function save_options() {
 }
 
 function restore_options() {
+	document.querySelector('#save').addEventListener('click', save_options);
+	
 	var nativelang = localStorage["native_language"];
 	var foreignlang = localStorage["foreign_language"];
 	if (!nativelang || !foreignlang) {
@@ -53,4 +55,4 @@ function restore_options() {
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);
-document.querySelector('#save').addEventListener('click', save_options);
+
