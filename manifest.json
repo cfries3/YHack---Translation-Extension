@@ -1,0 +1,23 @@
+{
+	"manifest_version": 2,
+
+	"name": "Parrot",
+	"description": "This extension allows real time translation.",
+	"version": "1.0",
+	
+	"background": {
+		"scripts": ["background.js"]
+	},
+	
+	"content_scripts": [
+		{
+			"matches": ["http://*/*", "https://*/*"],
+			"css": ["foreignwordformatting.css"],
+			"js": ["jquery-2.0.3.min.js", "replaceText.js"] 
+		}
+	],
+	
+	"web_accessible_resources": [
+		"script/jquery-2.0.3.min.js"
+	]
+}
