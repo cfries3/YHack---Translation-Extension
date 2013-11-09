@@ -1,0 +1,13 @@
+.word {
+  cursor: pointer;
+}
+
+span.tooltip {
+  background-color: #fff;
+  border: #dcdcdc solid 1px;
+  color: #333;
+  padding: 9px 17px;
+  position: absolute;
+  margin-top: 20px;
+  margin-left:-60px;
+}
