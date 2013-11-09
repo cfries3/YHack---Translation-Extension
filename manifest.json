@@ -22,12 +22,20 @@
 		"default_popup": "options.html",
 		"default_icon": "parrot.png"
 	},
+  
+  "permissions": [
+      "http://*/"
+    ],
 	
 	"content_scripts": [
 		{
 			"matches": ["http://*/*", "https://*/*"],
 			"css": ["custom.css", "foreignwordformatting.css"],
+<<<<<<< HEAD
+			"js": ["jquery.js", "indexedDB.js", "jquery.lettering.js", "jquery.hoverintent.minified.js", "replaceText.js", "parrot.js"] 
+=======
 			"js": ["jquery.js", "jquery.lettering.js", "jquery.hoverintent.minified.js", "replaceText.js", "indexedDB.js", "parrot.js"]
+>>>>>>> 744818ad122851560b64495c8f76fc38929989ff
 		}
 	],
 	
