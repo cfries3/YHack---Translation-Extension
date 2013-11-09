@@ -1,6 +1,8 @@
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
-		/*var response = request.text;
+        var bool = setupdb();
+		var response = request.text;
+        console.log("hello");
 
         //fetch foreign language setting
         var foreignLang = "french";
@@ -41,5 +43,5 @@ chrome.runtime.onMessage.addListener(
 			} 
 		}
 
-		sendResponse({ translation: response }); */
+		sendResponse({ translation: response }); 
 });
