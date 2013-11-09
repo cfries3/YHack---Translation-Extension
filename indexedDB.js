@@ -62,9 +62,9 @@ function checkDB(storeName, nativeL, nativeW, foreignL, foreignW, thisSite) {
 
     var transaction = db.transaction([storeName],"readwrite");
     var store = transaction.objectStore(storeName);
+	console.log("TEST");
     var index = store.index("nativeWord");
-    var bool = false;
-
+	console.log("HELLO");
     var request = index.get(nativeW.toLowerCase());
 
     //error finding entry
@@ -157,8 +157,9 @@ function updateWord (storeName, oldObj, thisSite) {
 
 //return list of all words in the store
 function readObjectStore(storeName) {
-    
-    //desired store    
+    alert(storeName);
+    //desired store   
+	
     var transaction = db.transaction([storeName], "readonly");
     var store = transaction.objectStore(storeName);
     var langSet = [];

@@ -1,14 +1,16 @@
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
-		var response = request.text;
+		/*var response = request.text;
 
         //fetch foreign language setting
         var foreignLang = "french";
+		alert("Before read");
         var words = readObjectStore(foreignLang);
-
+		alert("Read objects");
         //iterate over list of words
 		for (var i = 0; i < words.length; i++) {
             var curObj = words[i];
+			alert(curObj["nativeWord"] + " " + curObj["foreignWord"]);
             //check for equivalence
 			if (curObj["nativeWord"] == curObj["foreignWord"]) { 
 				continue; 
@@ -39,5 +41,5 @@ chrome.runtime.onMessage.addListener(
 			} 
 		}
 
-		sendResponse({ translation: response }); 
+		sendResponse({ translation: response }); */
 });
