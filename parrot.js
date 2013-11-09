@@ -8,7 +8,7 @@ function getTranslation(w, target) {
     data: null,
     success: function(data) {
      results = $(data).find("pod").last();
-     $(target).children('.tooltip').text(results.find("plaintext").text().split(' ').splice(0,3).join(' ')); 
+     $(target).children('.tooltip').text(results.find("plaintext").text().split(' ').splice(0,2).join(' ')); 
     },
     error: function(data) { 
       console.log('Error');
