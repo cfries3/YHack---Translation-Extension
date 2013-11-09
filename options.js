@@ -1,8 +1,9 @@
 $('#news').click(function(){
   var backup_text = $('#news').html();
-  
+  var suggestions = ["cuisine", "gouvernement", "chèvre", "football", "médecins", "histoire", "Colorado", "Soleil", "astronomy", "Moon"];
+
   $('#news').html("Loading...");
-  get_articles('cuisine', 'french');
+  get_articles(suggestions[Math.floor(Math.random() * suggestions.length)], 'french');
 
   setTimeout(function() {
     $('#news').html(backup_text);
@@ -98,7 +99,7 @@ function get_articles(word, inlanguage) {
         $list.html("<p>Articles related to <span class='text bold'>" + word + "</span> in <span class='text bold'>" + inlanguage + "</span></p><br/>");
         for (var i = 0; i < 3; i++) {
           var base = articles[i]['url'].split('/');
-          $list.append('<li class="text normal"><a href="' + articles[i]['url'] + '">' + articles[i]['title'] + '</a> - <span class="text book">' + base[2].substring(4,50) + '</span></li>');
+          $list.append('<li class="text normal"><a target="_blank" href="' + articles[i]['url'] + '">' + articles[i]['title'] + '</a> - <span class="text book">' + base[2].substring(4,50) + '</span></li>');
         }
 	    },
 	    fail: function(data) {
