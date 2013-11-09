@@ -3,36 +3,52 @@
 
 <title>Settings</title>
 <script src="options.js"></script>
+<link type="text/css" href="tuktuk/tuktuk.css" rel="stylesheet" />
+<link type="text/css" href="tuktuk/tuktuk.theme.css" rel="stylesheet" />
+<link type="text/css" href="tuktuk/tuktuk.icons.css" rel="stylesheet" />
 <link type="text/css" href="options.css" rel="stylesheet" />
+<script src="jquery.js"></script>
+<script src="tuktuk/tuktuk.js"></script>
 </head>
 
 <body>
-<div class="native">
-Native language:
-<select id="nativelang">
-	<option value="english">English</option>
-	<option value="french">French</option>
-	<option value="spanish">Spanish</option>
-	<option value="norwegian">Norwegian</option>
-</select>
-</div>
+<section class="padding bck light text ">
+  <form class="native" action="#">
+  <fieldset>
+    <label>Native language </label>
+    <span class="select">
+    <select id="nativelang">
+      <option value="english">English</option>
+      <option value="french">French</option>
+      <option value="spanish">Spanish</option>
+      <option value="norwegian">Norwegian</option>
+    </select>
+    </span>
+  </fieldset>
+  </form>
 
-<br /><br /> 
-<div class="foreign">
-Foreign language:
-<select id="foreignlang">
-	<option value="english">English</option>
-	<option value="french">French</option>
-	<option value="spanish">Spanish</option>
-	<option value="norwegian">Norwegian</option>
-</select>
-</div>
-<br />
-<br />
+  <form class="foreign" action="#">
+  <fieldset>
+    <label>Foreign language </label>
+    <span class="select">
+    <select id="foreignlang">
+      <option value="english">English</option>
+      <option value="french">French</option>
+      <option value="spanish">Spanish</option>
+      <option value="norwegian">Norwegian</option>
+    </select>
+    </span>
+  </fieldset>
+  
 
-<div id="status"></div>
-
-<button id="save">Save</button>
+  <div class="margin-top" id="status"></div>
+  
+  <fieldset id="button">
+    <button class="button " id="save"><span class="icon refresh"></span> Change</button>
+    <button class="button  alert" id="news"><span class="icon bookmark-empty"></span> Suprise me!</button>
+  </fieldset>
+  </form>
+</section>
 
 </body>
 </html>

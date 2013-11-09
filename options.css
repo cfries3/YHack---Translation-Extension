@@ -1,15 +1,12 @@
-.native {
-	width:150px;
+section {
+  padding: 30px 30px 30px 8px !important;
 }
 
-.foreign {
-	width:150px;
+.native, .foreign {
+	width: 300px;
 }
 
-select {
-	float:right;
-}
-
-button {
-	float:right;
+#button {
+  margin-left: 75px;
+  text-align: center;
 }
