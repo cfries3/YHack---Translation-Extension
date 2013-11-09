@@ -8,7 +8,7 @@ chrome.runtime.onMessage.addListener(
 			}
 			
 			while (response.search(words[i][0]) != -1) {
-				response = response.replace(words[i][0], words[i][1]);
+				response = response.replace(words[i][0], "<span class='foreign'>" + words[i][1] + "</span>");
 			}
 		}
 		sendResponse({ translation: response });
