@@ -4,7 +4,8 @@ function replaceWords() {
         //fetch foreign language setting
         var foreignLang = "french";
 		alert("Before read");
-        var words = readObjectStore(foreignLang);
+		var words = readObjectStore(foreignLang);
+		
 		alert("Read objects");
         //iterate over list of words
 		for (var i = 0; i < words.length; i++) {

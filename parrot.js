@@ -1,20 +1,12 @@
 function getTranslation(w, target) {
   var xml = "";
   var results = "";
-<<<<<<< HEAD
+
   var url = "http://api.wolframalpha.com/v2/query?appid=4KJG8A-T9U3UY2EPT&input=translate%20" + w + "%20from%20" + localStorage.native_language + "%20to%20" + localStorage.foreign_language + "&format=plaintext";
   console.log(url);
   $.ajax({
     dataType: "xml",
     url: url,
-=======
-  var native_lang = "";
-  var foreign_lang = ""
-		
-  $.ajax({
-    dataType: "xml",
-    url: "http://api.wolframalpha.com/v2/query?appid=4KJG8A-T9U3UY2EPT&input=translate%20" + w + "%20from%20" + "french" + "%20to%20" + "english" + "&format=plaintext",
->>>>>>> 744818ad122851560b64495c8f76fc38929989ff
     data: null,
     success: function(data) {
      results = $(data).find("pod").last();
@@ -50,7 +42,12 @@ function getTranslation(w, target) {
   });
 }
 
+
 $(document).ready(function() {
+	setupdb();
+})
+
+function start() {
 	var lang = $( 'html' ).attr('lang');
 	if (lang == "en") {
 		replaceWords();
@@ -79,4 +76,5 @@ $(document).ready(function() {
       $('.tooltip').remove();
 	  })
 	}
-})
+//})
+}

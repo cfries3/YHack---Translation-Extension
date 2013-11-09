@@ -1,6 +1,6 @@
 var idbSupported = false;
 var db;
-setupdb();
+//setupdb();
 
 function setupdb(){
 
@@ -47,6 +47,7 @@ function setupdb(){
         openRequest.onsuccess = function(e) {
             console.log("Success, in finding database");
             db = e.target.result;
+			start();
         }
  
         openRequest.onerror = function(e) {
@@ -159,10 +160,10 @@ function updateWord (storeName, oldObj, thisSite) {
 function readObjectStore(storeName) {
     alert(storeName);
     //desired store   
-	
+	var langSet = [];
     var transaction = db.transaction([storeName], "readonly");
     var store = transaction.objectStore(storeName);
-    var langSet = [];
+    
 
     //iteration over set
     var cursor = store.openCursor();
