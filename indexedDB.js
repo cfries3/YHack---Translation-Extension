@@ -62,9 +62,7 @@ function checkDB(storeName, nativeL, nativeW, foreignL, foreignW, thisSite) {
 
     var transaction = db.transaction([storeName],"readwrite");
     var store = transaction.objectStore(storeName);
-	console.log("TEST");
     var index = store.index("nativeWord");
-	console.log("HELLO");
     var request = index.get(nativeW.toLowerCase());
 
     //error finding entry
@@ -156,26 +154,48 @@ function updateWord (storeName, oldObj, thisSite) {
 
 
 //return list of all words in the store
-function readObjectStore(storeName) {
-    alert(storeName);
+function readObjectStore(storeName, mode) {
     //desired store   
-	var langSet = [];
+	var langSet = new Array();
     var transaction = db.transaction([storeName], "readonly");
     var store = transaction.objectStore(storeName);
     
 
     //iteration over set
     var cursor = store.openCursor();
-
+	
     cursor.onsuccess = function(e) {
+		
         var res = e.target.result;
+		console.log(res);
         if (res) {
+		
             //compile list of objects
             langSet.push(res.value);
-            console.log(res.value);
-            res.continue();  
-        }
-        return langSet;
+			console.log(langSet.length);
+            console.log(langSet);
+            res.continue(); 
+			
+        } else {
+			if (mode == "subEng") {
+				var response = document.getElementsByTagName("body")[0].innerHTML;
+				for (var i = 0; i < langSet.length; i++) {
+					var curObj = langSet[i];
+					//check for equivalence
+					if (curObj["nativeWord"] == curObj["foreignWord"] || curObj["nativeWord"] == "for") { 
+						continue; 
+					}
+					var uppercase = [ curObj["nativeWord"].charAt(0).toUpperCase() + curObj["nativeWord"].slice(1), 
+								  curObj["foreignWord"].charAt(0).toUpperCase() + curObj["foreignWord"].slice(1) ];
+
+					while (response.search(curObj["nativeWord"]) != -1 || response.search(uppercase[0]) != -1) {
+						response = response.replace(curObj["nativeWord"], "<span class='foreign'>" + curObj["foreignWord"] + "</span>");
+						response = response.replace(uppercase[0], "<span class='foreign'>" + uppercase[1] + "</span>");
+					}
+				}
+				document.getElementsByTagName("body")[0].innerHTML = response;
+			}
+		}
     }
 }
 

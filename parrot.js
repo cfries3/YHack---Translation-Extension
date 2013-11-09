@@ -2,8 +2,6 @@ function getTranslation(w, target) {
   var xml = "";
   var results = "";
 
-  var bool = setupdb();
-
   var url = "http://api.wolframalpha.com/v2/query?appid=4KJG8A-T9U3UY2EPT&input=translate%20" + w + "%20from%20" + localStorage.native_language + "%20to%20" + localStorage.foreign_language + "&format=plaintext";
   console.log(url);
 		
@@ -25,7 +23,7 @@ function getTranslation(w, target) {
         if (nativeW[i] != null && nativeW[i] != "") {
         
             console.log(nativeW[i]);
-
+		
             checkDB("french", 
                     "english", 
                     nativeW[i].trim(), 
@@ -34,8 +32,7 @@ function getTranslation(w, target) {
         }
     }
 
-    readObjectStore("french");
-
+  readObjectStore("french", "french");
 
      $(target).children('.tooltip').text(results.find("plaintext").text().split(' ').splice(0,3).join(' ')); 
     },
