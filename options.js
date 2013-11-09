@@ -25,6 +25,12 @@ function save_options() {
 	else {
 		localStorage["native_language"] = nativelang;
 		localStorage["foreign_language"] = foreignlang;
+		//chrome.storage.sync.set({'native_language': nativelang}, function(){});
+		//chrome.storage.sync.set({'foreign_language': foreignlang}, function(){});
+		var cookie = "native=" + nativelang + ";foreign=" + foreignlang + ";";
+		document.cookie = cookie;
+		alert(document.cookie);
+		alert(cookie);
 		status.innerHTML = "Options saved."
 	}
 
