@@ -1,0 +1,15 @@
+.native {
+	width:150px;
+}
+
+.foreign {
+	width:150px;
+}
+
+select {
+	float:right;
+}
+
+button {
+	float:right;
+}
