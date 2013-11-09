@@ -7,7 +7,7 @@ function getTranslation(w, target) {
 		
   $.ajax({
     dataType: "xml",
-    url: "http://api.wolframalpha.com/v2/query?appid=4KJG8A-T9U3UY2EPT&input=translate%20" + w + "%20from%20" + "french" + "%20to%20" + "english" + "&format=plaintext",
+    url:  url,
     data: null,
     success: function(data) {
      results = $(data).find("pod").last();
@@ -17,7 +17,6 @@ function getTranslation(w, target) {
      nativeW = nativeW.replace(/ *\([^)]*\) */g, "");
      nativeW = nativeW.split(' | ');
      console.log(nativeW);
-
     //enter in three entries for definitions is they exist
      for (var i = 0; i < 3; i++) {
         if (nativeW[i] != null && nativeW[i] != "") {
@@ -43,6 +42,8 @@ function getTranslation(w, target) {
 }
 
 $(document).ready(function() {
+  if (localStorage.native_language === undefined) { localStorage.native_language = "English" }
+  if (localStorage.foreign_language === undefined) { localStorage.foreign_language = "French" }
 	setupdb();
 })
 
@@ -66,8 +67,8 @@ function start() {
       $(event.target).html(word + "<span class=\"tooltip\"><div id=\"loadingProgressG\"><div id=\"loadingProgressG_1\" class=\"loadingProgressG\"></div></div> </span>");
       
       // Remove any trailing punctuation without saving the text into the page
-      word = word.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-		
+      word = word.replace(/[\.,-\/#!$%\^(l')(d')&\*;:{}=\-_`~()]/gi,"");
+
       // Translate word
       getTranslation(word, event.target);
 
