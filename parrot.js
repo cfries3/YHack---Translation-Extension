@@ -4,7 +4,7 @@ function getTranslation(w, target) {
 
   $.ajax({
     dataType: "xml",
-    url: "http://api.wolframalpha.com/v2/query?appid=4KJG8A-T9U3UY2EPT&input=translate%20" + w + "%20from%20french%20to%20english&format=image,plaintext",
+    url: "http://api.wolframalpha.com/v2/query?appid=4KJG8A-T9U3UY2EPT&input=translate%20" + w + "%20from%20french%20to%20english&format=plaintext",
     data: null,
     success: function(data) {
      results = $(data).find("pod").last();
@@ -15,12 +15,13 @@ function getTranslation(w, target) {
     }
   });
 }
-	
+
 $(document).ready(function() {
 	var lang = $( 'html' ).attr('lang');
 	if (lang == "en") {
 		replaceWords();
 	} else {
+    
 	  // Isolate every words by a span
 	  $('p').lettering('words');
 		
@@ -28,15 +29,21 @@ $(document).ready(function() {
 	  var wordToTranslate = "";
 	  
 	  $( ".word" ).hoverIntent(function(event) {
-		var txt = $(event.target).text();
+      
+      // Word to translate
+      var word = $(event.target).text();
 
-		$(event.target).html(txt + "<span class=\"tooltip\">Loading...</span>");
-
-		wordToTranslate = txt; 
-		getTranslation(wordToTranslate, event.target, lang);
+      // Add Loading tooltip
+      $(event.target).html(word + "<span class=\"tooltip\">Loading...</span>");
+      
+      // Remove any trailing punctuation without saving the text into the page
+      word = word.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+ 
+      // Translate word
+      getTranslation(word, event.target);
 
 	  }, function(event) {
-		$('.tooltip').remove();
+      $('.tooltip').remove();
 	  })
 	}
 })
