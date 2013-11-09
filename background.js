@@ -7,6 +7,7 @@ chrome.runtime.onMessage.addListener(
 				continue; 
 			}
 			
+
 			while (response.search(words[i][0]) != -1) {
 				response = response.replace(words[i][0], "<span class='foreign'>" + words[i][1] + "</span>");
 			}
