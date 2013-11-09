@@ -3,7 +3,6 @@ var db;
 setupdb();
 
 function setupdb(){
-	alert("CALLED");
     if("indexedDB" in window) {
         idbSupported = true;
         console.log("indexedDB supported");
@@ -174,6 +173,7 @@ function readObjectStore(storeName) {
             console.log(res.value);
             res.continue();  
         }
+        return langSet;
     }
 }
 
