@@ -3,6 +3,7 @@ var db;
 setupdb();
 
 function setupdb(){
+
     if("indexedDB" in window) {
         idbSupported = true;
         console.log("indexedDB supported");
@@ -10,7 +11,7 @@ function setupdb(){
  
     if(idbSupported) {
         //second var is version number, increase when adding new object Stores
-        var openRequest = indexedDB.open("langDictionary",5);
+        var openRequest = indexedDB.open("langDictionary",10);
         console.log(openRequest);
  
         //add any object stores here
@@ -19,26 +20,26 @@ function setupdb(){
             var thisDB = e.target.result;
 
             if(!thisDB.objectStoreNames.contains("french")) {
-                var frenchObjStore = thisDB.createObjectStore("french", {keyPath: "foreignWord"});
-                frenchObjStore.createIndex("foreignWord", "foreignWord", {unique:true});
+                var frenchObjStore = thisDB.createObjectStore("french", {keyPath: "nativeWord"});
+                frenchObjStore.createIndex("nativeWord", "nativeWord", {unique:true});
                 console.log("french store created");
             }
 
             if(!thisDB.objectStoreNames.contains("english")) {
-                var englishObjStore = thisDB.createObjectStore("english", {keyPath: "foreignWord"});
-                englishObjStore.createIndex("foreignWord", "foreignWord", {unique:true});
+                var englishObjStore = thisDB.createObjectStore("english", {keyPath: "nativeWord"});
+                englishObjStore.createIndex("nativeWord", "nativeWord", {unique:true});
                 console.log("english store created");
             }
 
             if(!thisDB.objectStoreNames.contains("spanish")) {
-                var spanishObjStore = thisDB.createObjectStore("spanish", {keyPath: "foreignWord"});
-                spanishObjStore.createIndex("foreignWord", "foreignWord", {unique:false});
+                var spanishObjStore = thisDB.createObjectStore("spanish", {keyPath: "nativeWord"});
+                spanishObjStore.createIndex("nativeWord", "nativeWord", {unique:false});
                 console.log("spanish store created");
             }
 
             if(!thisDB.objectStoreNames.contains("norwegian")) {
-                var norwegianObjStore = thisDB.createObjectStore("norwegian", {keyPath: "foreignWord"});
-                norwegianObjStore.createIndex("foreignWord", "foreignWord", {unique:true});
+                var norwegianObjStore = thisDB.createObjectStore("norwegian", {keyPath: "nativeWord"});
+                norwegianObjStore.createIndex("nativeWord", "nativeWord", {unique:true});
                 console.log("norwegian store created");
             }
         }
@@ -61,10 +62,10 @@ function checkDB(storeName, nativeL, nativeW, foreignL, foreignW, thisSite) {
 
     var transaction = db.transaction([storeName],"readwrite");
     var store = transaction.objectStore(storeName);
-    var index = store.index("foreignWord");
+    var index = store.index("nativeWord");
     var bool = false;
 
-    var request = index.get(foreignW.toLowerCase());
+    var request = index.get(nativeW.toLowerCase());
 
     //error finding entry
     request.onerror = function(e) {
@@ -121,7 +122,7 @@ function updateWord (storeName, oldObj, thisSite) {
         var res = e.target.result;
         if (res) {
             var obj = res.value;
-            if (obj["foreignWord"] == oldObj["foreignWord"]) {
+            if (obj["nativeWord"] == oldObj["nativeWord"]) {
                 console.log("found matching entry");
                 var request = store.delete(res.key); 
 

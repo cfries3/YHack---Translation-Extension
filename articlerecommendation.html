@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Article recommendation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="jquery.bingsearch.js"></script>
+	<script src="jquery.base64.js"></script>
+
+    <script type="text/javascript">
+
+	function get_articles(word, inlanguage) {
+		
+		var langcode = new Object();
+		langcode['english'] = 'en-US';
+		langcode['french'] = 'fr-CA';
+		langcode['norwegian'] = 'nb-NO';
+		langcode['spanish'] = 'es-ES';
+		
+		var articles = [];
+		
+		$.bingSearch({
+		    query: word,
+		    appKey: 'im9RWof1FQx0l+0VNxOninLgEtmC7VVUHUU9DwOKU6U=',
+			targetlang: langcode[inlanguage],
+		    beforeSearchResults: function(data) {
+		        // Use data.hasMore, data.resultBatchCount
+		    },
+		    // Optional: Function is called once per result in the current batch
+		    searchResultIterator: function(data) {
+				var a = {};
+				a['title'] = data['Title'];
+				a['url'] = data['Url'];
+				a['description'] = data['Description'];
+				articles.push(a);
+		        // Use data.ID, data.Title, data.Description, data.Url, data.DisplayUrl, data.Metadata.Type (check for undefined)
+		    },
+		    afterSearchResults: function(data) {
+				console.log(articles);
+				var output = document.getElementById("output");
+				output.innerHTML += "<p><b>" + word + " in " + inlanguage + "</b> </p>";
+				for(var i=0; i<3; i++) {
+					base = articles[i]['url'].split('/');
+					console.log(base[2]);
+					output.innerHTML += "<p><a href=" + articles[i]['url'] + ">" + articles[i]['title'] + "</a><br>" + base[2] + "<br>" + articles[i]['description'] + "</p>";
+				}
+		    },
+		    fail: function(data) {
+		        console.log("Failed again.")
+		    }
+		
+		});
+	}
+
+	get_articles('cuisine', 'french');
+	get_articles('cuisine', 'english');
+	get_articles('asylsøker', 'norwegian');
+	
+	
+    </script>
+
+</head>
+<body>
+    <div id="output"></div>
+</body>
+</html>

@@ -3,7 +3,7 @@ chrome.runtime.onMessage.addListener(
 		var response = request.text;
 
         //fetch foreign language setting
-        var foreignLang = localStorage["foreign_language"];
+        var foreignLang = "french";
         var words = readObjectStore(foreignLang);
 
         //iterate over list of words
