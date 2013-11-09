@@ -6,9 +6,9 @@
 <link type="text/css" href="tuktuk/tuktuk.css" rel="stylesheet" />
 <link type="text/css" href="tuktuk/tuktuk.theme.css" rel="stylesheet" />
 <link type="text/css" href="tuktuk/tuktuk.icons.css" rel="stylesheet" />
+<link rel="stylesheet" href="custom.css" type="text/css" />
 <link type="text/css" href="options.css" rel="stylesheet" />
-<script src="jquery.js"></script>
-<script src="tuktuk/tuktuk.js"></script>
+
 </head>
 
 <body>
@@ -44,12 +44,15 @@
   <div class="text center" id="status"></div>
   
   <fieldset class="margin-top" id="button">
-    <button class="button " id="save"><span class="icon refresh"></span> Change</button>
-    <button class="button  alert" id="news"><span class="icon gift"></span> Suprise me!</button>
+    <button class="button" id="save"><span class="icon refresh"></span> Change</button>
+    <button class="button alert" id="news"><span class="icon gift"></span> Suprise me!</button>
   </fieldset>
   </form>
-</section>
-
-
-</body>
+  
+  <ul id="articles" class="margin-top circle"></ul>
+</section><script src="jquery.js"></script>
+<script src="jquery.bingsearch.js"></script>
+<script src="jquery.base64.js"></script>
+<script src="options.js"></script>
+<script src="tuktuk/tuktuk.js"></script></body>
 </html>

@@ -1,3 +1,14 @@
+$('#news').click(function(){
+  var backup_text = $('#news').html();
+  
+  $('#news').html("Loading...");
+  get_articles('cuisine', 'french');
+
+  setTimeout(function() {
+    $('#news').html(backup_text);
+  }, 1000);  
+});
+
 function save_options() {
 	var selectnative = document.getElementById("nativelang");
 	var nativelang = selectnative.children[selectnative.selectedIndex].value;
@@ -54,5 +65,47 @@ function restore_options() {
 	}
 }
 
+function get_articles(word, inlanguage) {
+	
+	var langcode = new Object();
+	langcode['english'] = 'en-US';
+	langcode['french'] = 'fr-CA';
+	langcode['norwegian'] = 'nb-NO';
+	langcode['spanish'] = 'es-ES';
+	
+	var articles = [];
+	
+	$.bingSearch({
+	    query: word,
+	    appKey: 'im9RWof1FQx0l+0VNxOninLgEtmC7VVUHUU9DwOKU6U=',
+		targetlang: langcode[inlanguage],
+	    beforeSearchResults: function(data) {
+	        // Use data.hasMore, data.resultBatchCount
+	    },
+	    // Optional: Function is called once per result in the current batch
+	    searchResultIterator: function(data) {
+			var a = {};
+			a['title'] = data['Title'];
+			a['url'] = data['Url'];
+			a['description'] = data['Description'];
+			articles.push(a);
+	        // Use data.ID, data.Title, data.Description, data.Url, data.DisplayUrl, data.Metadata.Type (check for undefined)
+	    },
+	    afterSearchResults: function(data) {
+        var $list = $('#articles');
+        $list.html("<p>Articles related to <span class='text bold'>" + word + "</span> in <span class='text bold'>" + inlanguage + "</span></p><br/>");
+        for (var i = 0; i < 3; i++) {
+          var base = articles[i]['url'].split('/');
+          $list.append('<li class="text normal"><a href="' + articles[i]['url'] + '">' + articles[i]['title'] + '</a> - <span class="text book">' + base[2].substring(4,50) + '</span></li>');
+        }
+	    },
+	    fail: function(data) {
+	        console.log("Failed again.")
+	    }
+	
+	});
+}
+
 document.addEventListener('DOMContentLoaded', restore_options);
+
 

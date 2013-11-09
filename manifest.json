@@ -18,12 +18,16 @@
 		"default_popup": "options.html",
 		"default_icon": "parrot.png"
 	},
+  
+  "permissions": [
+      "http://*/"
+    ],
 	
 	"content_scripts": [
 		{
 			"matches": ["http://*/*", "https://*/*"],
 			"css": ["custom.css", "foreignwordformatting.css"],
-			"js": ["indexedDB.js", "jquery.js", "jquery.lettering.js", "jquery.hoverintent.minified.js", "replaceText.js", "parrot.js"] 
+			"js": ["jquery.js", "indexedDB.js", "jquery.lettering.js", "jquery.hoverintent.minified.js", "replaceText.js", "parrot.js"] 
 		}
 	],
 	
