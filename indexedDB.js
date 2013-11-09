@@ -1,8 +1,9 @@
 var idbSupported = false;
 var db;
+setupdb();
 
-document.addEventListener("DOMContentLoaded", function(){
-
+function setupdb(){
+	alert("CALLED");
     if("indexedDB" in window) {
         idbSupported = true;
         console.log("indexedDB supported");
@@ -53,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function(){
             console.dir(e);
         }
     }
-},false);
+}
 
 
 //check if word is in database
