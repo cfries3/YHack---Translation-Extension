@@ -1,6 +1,5 @@
 function replaceWords() {
 	var response = document.getElementsByTagName("body")[0].innerHTML;
-		
         //fetch foreign language setting
         var foreignLang = "french";
 		alert("Before read");

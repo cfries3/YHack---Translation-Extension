@@ -45,7 +45,6 @@ function getTranslation(w, target) {
   });
 }
 
-
 $(document).ready(function() {
 	setupdb();
 })
@@ -79,5 +78,5 @@ function start() {
       $('.tooltip').remove();
 	  })
 	}
-//})
 }
+
