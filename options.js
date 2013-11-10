@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $('#news').click(function(){
   var backup_text = $('#news').html();
   var suggestions = ["cuisine", "gouvernement", "chèvre", "football", "médecins", "histoire", "Colorado", "Soleil", "astronomy", "Moon"];
@@ -110,5 +111,4 @@ function get_articles(word, inlanguage) {
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);
-
 
