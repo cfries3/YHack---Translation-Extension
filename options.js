@@ -1,6 +1,6 @@
 $('#news').click(function(){
   var backup_text = $('#news').html();
-  var suggestions = ["cuisine", "gouvernement", "chèvre", "football", "médecins", "histoire", "Colorado", "Soleil", "astronomy", "Moon"];
+  var suggestions = ["cuisine", "gouvernement", "chevre", "football", "medecins", "histoire", "Colorado", "Soleil", "astronomy", "Moon"];
 
   $('#news').html("Loading...");
 
