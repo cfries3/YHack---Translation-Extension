@@ -179,23 +179,45 @@ function readObjectStore(storeName, mode) {
         } else {
 			if (mode == "subEng") {
 				var response = document.getElementsByTagName("body")[0].innerHTML;
-				for (var i = 0; i < langSet.length; i++) {
-					var curObj = langSet[i];
-					//check for equivalence
-					if (curObj["nativeWord"] == curObj["foreignWord"] || curObj["nativeWord"] == "for") { 
-						continue; 
-					}
-					var uppercase = [ curObj["nativeWord"].charAt(0).toUpperCase() + curObj["nativeWord"].slice(1), 
-								  curObj["foreignWord"].charAt(0).toUpperCase() + curObj["foreignWord"].slice(1) ];
-
-					while (response.search(curObj["nativeWord"]) != -1 || response.search(uppercase[0]) != -1) {
-						response = response.replace(curObj["nativeWord"], "<span class='foreign'>" + curObj["foreignWord"] + "</span>");
-						response = response.replace(uppercase[0], "<span class='foreign'>" + uppercase[1] + "</span>");
+				// Need function that manually goes through html to build new page, only replacing things that aren't in tags!
+				var newHTML = "";
+				var curChunk = "";
+				
+				var openingBraces = 0;
+				for (var j = 0; j < response.length; j++) {
+					var c = response.charAt(j);
+					if (c == "<") {
+						for (var i = 0; i < langSet.length; i++) {
+							var curObj = langSet[i];
+							//check for equivalence
+							if (curObj["nativeWord"] == curObj["foreignWord"] || curObj["nativeWord"] == "for") { 
+								continue; 
+							}
+							var uppercase = [ curObj["nativeWord"].charAt(0).toUpperCase() + curObj["nativeWord"].slice(1), 
+							curObj["foreignWord"].charAt(0).toUpperCase() + curObj["foreignWord"].slice(1) ];
+							while (curChunk.search(curObj["nativeWord"]) != -1 || curChunk.search(uppercase[0]) != -1) {
+								curChunk = curChunk.replace(" " + curObj["nativeWord"], "<span class='foreign'>" + curObj["foreignWord"] + "</span>");
+								curChunk = curChunk.replace(" " + uppercase[0], "<span class='foreign'>" + uppercase[1] + "</span>");
+								console.log(curChunk);
+							}
+						}
+						newHTML += curChunk;
+						newHTML += c;
+						openingBraces += 1;
+						curChunk = "";
+					} else if (c == ">") {
+						openingBraces -= 1;
+						newHTML += c;
+					} else if (openingBraces == 0) { 
+						curChunk = curChunk + c;
+					} else {
+						newHTML += c;
 					}
 				}
-				document.getElementsByTagName("body")[0].innerHTML = response;
+				document.getElementsByTagName("body")[0].innerHTML = newHTML;
+				console.log(newHTML);
 			}
-		}
+		}	
     }
 }
 

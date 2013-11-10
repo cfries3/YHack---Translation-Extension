@@ -1,10 +1,9 @@
+<<<<<<< HEAD
 $('#news').click(function(){
   var backup_text = $('#news').html();
   var suggestions = ["cuisine", "gouvernement", "chevre", "football", "medecins", "histoire", "Colorado", "Soleil", "astronomy", "Moon"];
 
   $('#news').html("Loading...");
-
-  
   get_articles(suggestions[Math.floor(Math.random() * suggestions.length)], 'french');
 
   setTimeout(function() {
@@ -112,5 +111,4 @@ function get_articles(word, inlanguage) {
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);
-
 
