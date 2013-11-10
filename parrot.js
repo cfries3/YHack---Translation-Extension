@@ -51,7 +51,7 @@ function start() {
 	var lang = $( 'html' ).attr('lang');
 	if (lang == "en") {
 		replaceWords();
-	} else {
+	} else if (lang == "fr") {
 	  // Isolate every words by a span
 	  $('p').lettering('words');
 		
