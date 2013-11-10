@@ -151,73 +151,91 @@ function updateWord (storeName, oldObj, thisSite) {
     }
 }
 
+function replaceChunk(chunk, langSet) {
+	var words_set = chunk.split(" ");
+	chunk = ""
+	for (var k = 0; k < words_set.length; k++) {
+		var translated = false;
+		for (var i = 0; i < langSet.length; i++) {
+			var curObj = langSet[i];
+			//check for equivalence
+			if (curObj["nativeWord"] == curObj["foreignWord"]) { 
+				continue; 
+			}
+			var uppercase = [ curObj["nativeWord"].charAt(0).toUpperCase() + curObj["nativeWord"].slice(1), 
+			curObj["foreignWord"].charAt(0).toUpperCase() + curObj["foreignWord"].slice(1) ];
+			
+			if (words_set[k].trim() == curObj["nativeWord"]) {
+				chunk += curObj["foreignWord"] + " ";
+				translated = true;
+				break;
+			} else if (words_set[k] == uppercase[0]) { 
+				chunk += uppercase[1] + " ";
+				translated = true;
+				break;
+			} 
+		}
+		if (translated = false) {
+			chunk += words_set[k].trim() + " ";
+		}
+	}
+	return chunk;
+}
 
+function getForeignWords(initialHTML, langSet) {
+	// Need function that manually goes through html to build new page, only replacing things that aren't in tags!
+	var newHTML = "";
+	var curChunk = "";
+	var openingBraces = 0;
+	
+	// Iterate through the letters in the html.
+	for (var j = 0; j < initialHTML.length; j++) {
+		// Clean up the input.
+		var c = initialHTML.charAt(j).trim();
+		if (c.length == 0) c = " ";
+		
+		if (c == "<") {
+			var translatedChunk = replaceChunk(curChunk, langSet);
+			newHTML += translatedChunk;
+			newHTML += c;
+			openingBraces += 1;
+			curChunk = "";
+		} else if (c == ">") {
+			openingBraces -= 1;
+			newHTML += c;
+		} else if (openingBraces == 0) { 
+			curChunk = curChunk + c;
+		} else {
+			newHTML += c;
+		}				
+	}
+	return newHTML;
+}
 
 //return list of all words in the store
 function readObjectStore(storeName, mode) {
-    //desired store   
+  //desired store   
 	var langSet = new Array();
-    var transaction = db.transaction([storeName], "readonly");
-    var store = transaction.objectStore(storeName);
+  var transaction = db.transaction([storeName], "readonly");
+  var store = transaction.objectStore(storeName);
     
-
-    //iteration over set
-    var cursor = store.openCursor();
+  //iteration over set
+  var cursor = store.openCursor();
 	
-    cursor.onsuccess = function(e) {
-		
-        var res = e.target.result;
-        if (res) {
-            //compile list of objects
-            langSet.push(res.value);
-            res.continue(); 
-			
-        } else {
+  cursor.onsuccess = function(e) {
+    var res = e.target.result;
+    if (res) {
+	    //compile list of objects
+      langSet.push(res.value);
+      res.continue(); 
+    } else {
 			if (mode == "subEng") {
 				var response = document.getElementsByTagName("body")[0].innerHTML;
-				// Need function that manually goes through html to build new page, only replacing things that aren't in tags!
-				var newHTML = "";
-				var curChunk = "";
-				
-				var openingBraces = 0;
-				for (var j = 0; j < response.length; j++) {
-					var c = response.charAt(j);
-					if (c == "<") {
-						console.log(curChunk);
-						for (var i = 0; i < langSet.length; i++) {
-							var curObj = langSet[i];
-							//check for equivalence
-							if (curObj["nativeWord"] == curObj["foreignWord"]) { 
-								continue; 
-							}
-							var uppercase = [ curObj["nativeWord"].charAt(0).toUpperCase() + curObj["nativeWord"].slice(1), 
-							curObj["foreignWord"].charAt(0).toUpperCase() + curObj["foreignWord"].slice(1) ];
-							while (curChunk.search(curObj["nativeWord"]) != -1 || curChunk.search(uppercase[0]) != -1) {
-								console.log(curObj["nativeWord"] + " " + curObj["foreignWord"]);
-							
-								curChunk = curChunk.replace(curObj["nativeWord"], "<span class='foreign'>" + curObj["foreignWord"] + "</span>");
-								curChunk = curChunk.replace(uppercase[0], "<span class='foreign'>" + uppercase[1] + "</span>");
-								console.log("In loop :(");
-							}
-						}
-						newHTML += curChunk;
-						newHTML += c;
-						openingBraces += 1;
-						curChunk = "";
-					} else if (c == ">") {
-						openingBraces -= 1;
-						newHTML += c;
-					} else if (openingBraces == 0) { 
-						curChunk = curChunk + c;
-					} else {
-						newHTML += c;
-					}
-				}
-				console.log(newHTML);
-				document.getElementsByTagName("body")[0].innerHTML = newHTML;
-			}
-		}	
-    }
+				response = getForeignWords(response, langSet);
+				document.getElementsByTagName("body")[0].innerHTML = response;
+			}	
+   	}
+  }
 }
 
             
