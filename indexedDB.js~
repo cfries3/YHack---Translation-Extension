@@ -195,8 +195,8 @@ function readObjectStore(storeName, mode) {
 							while (curChunk.search(curObj["nativeWord"]) != -1 || curChunk.search(uppercase[0]) != -1) {
 								console.log(curObj["nativeWord"] + " " + curObj["foreignWord"]);
 							
-								curChunk = curChunk.replace(curObj["nativeWord"], curObj["foreignWord"]);
-								curChunk = curChunk.replace(uppercase[0], uppercase[1]);
+								curChunk = curChunk.replace(curObj["nativeWord"], "<span class='foreign'>" + curObj["foreignWord"] + "</span>");
+								curChunk = curChunk.replace(uppercase[0], "<span class='foreign'>" + uppercase[1] + "</span>");
 								console.log("In loop :(");
 							}
 						}
